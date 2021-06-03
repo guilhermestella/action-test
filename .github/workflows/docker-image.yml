@@ -20,4 +20,6 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: test/test
+        username: foo
+        password: bar
         registry: http://168.194.255.179:5010
