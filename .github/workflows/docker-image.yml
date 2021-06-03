@@ -18,5 +18,5 @@ jobs:
       env:
           IMAGE_TAG: ${{ github.sha }}
       run: |
-          docker build -t http://docker-registry.gruposalutem.com.br:5010/test:latest .
-          docker push http://docker-registry.gruposalutem.com.br:5010/test:latest
+          docker build -t docker-registry.gruposalutem.com.br:5010/test:latest .
+          docker push docker-registry.gruposalutem.com.br:5010/test:latest
