@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      env:
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build . -t docker-registry.gruposalutem.com.br:5010/test:$IMAGE_TAG
+        docker push docker-registry.gruposalutem.com.br:5010/test:$IMAGE_TAG
