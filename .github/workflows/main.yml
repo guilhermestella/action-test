@@ -27,7 +27,7 @@ jobs:
 
       # Create image tagged with project version
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag guilhermestella/action-test:${{steps.vars.outputs.tag}}
+        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/action-test:${{steps.vars.outputs.tag}}
 
       # Push Image to Registry
       - name: Push the tagged Docker image
