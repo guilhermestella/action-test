@@ -30,7 +30,7 @@ jobs:
           echo "Sha: ${{ steps.vars.outputs.sha_short }}"
 
       - name: Criando Imagem do Docker
-        run: docker build . --file Dockerfile --tag docker.pkg.github.com/guilhermestella/action-test/action-test:${steps.vars.outputs.sha_short}
+        run: docker build . --file Dockerfile --tag docker.pkg.github.com/guilhermestella/action-test/action-test:${GITHUB_SHA::8}
 
       # Push Image to Registry
       - name: Push the tagged Docker image
