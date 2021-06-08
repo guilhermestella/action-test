@@ -30,4 +30,4 @@ jobs:
 
       # Push Image to Registry
       - name: Push the tagged Docker image
-        run: docker push guilhermestella/action-test:${{steps.vars.outputs.tag}}
+        run: docker push guilhermestella/action-test:latest
