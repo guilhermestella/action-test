@@ -19,7 +19,6 @@ jobs:
       - name: Log into registry ${{ env.REGISTRY }}
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
         
-        
       # Get Project Version
       - name: Get the version
         id: vars
@@ -27,7 +26,7 @@ jobs:
 
       # Create image tagged with project version
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/action-test:${{steps.vars.outputs.tag}}
+        run: docker build . --file Dockerfile --tag guilhermestella/action-test:latest
 
       # Push Image to Registry
       - name: Push the tagged Docker image
