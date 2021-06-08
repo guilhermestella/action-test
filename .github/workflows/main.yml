@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "##[set-output name=tag;]$(echo ${GITHUB_REF##/*})"
+          echo "##[set-output name=tag;]$(echo ${GITHUB_REF/refs\/tags\//})"
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
           
       - name: Imprimindo variáveis
