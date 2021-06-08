@@ -26,8 +26,8 @@ jobs:
 
       # Create image tagged with project version
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag guilhermestella/action-test:latest
+        run: docker build . --file Dockerfile --tag docker.pkg.github.com/guilhermestella/action-test/action-test:latest
 
       # Push Image to Registry
       - name: Push the tagged Docker image
-        run: docker push guilhermestella/action-test:latest
+        run: docker push docker.pkg.github.com/guilhermestella/action-test/action-test:latest
