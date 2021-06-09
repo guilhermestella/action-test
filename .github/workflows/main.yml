@@ -24,7 +24,7 @@ jobs:
           repo: action-test
 
       - name: Criando Imagem do Docker
-        run: docker build . --file Dockerfile --tag ghcr.io/guilhermestella/action-test:${steps.latest_version.outputs.latest_tag}
+        run: docker build . --file Dockerfile --tag ghcr.io/${GITHUB_REPOSITORY}:${steps.latest_version.outputs.latest_tag}
 
       - name: Push the tagged Docker image
-        run: docker push ghcr.io/guilhermestella/action-test:${steps.latest_version.outputs.latest_tag}
+        run: docker push ghcr.io/${GITHUB_REPOSITORY}:${steps.latest_version.outputs.latest_tag}
