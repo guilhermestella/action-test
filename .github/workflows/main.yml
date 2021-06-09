@@ -15,31 +15,16 @@ jobs:
 
       - name: Logando no Docker Registry do Github
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login ghcr.io -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        
-      - name: Declarando algumas variáveis
-        id: vars
-        shell: bash
-        run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-          
+
       - name: Get Latest Release
         id: latest_version
         uses: abatilo/release-info-action@v1.3.0
         with:
           owner: guilhermestella
           repo: action-test
-          
-      - name: Imprimindo variáveis
-        run: |
-          echo "Branch: ${{ steps.vars.outputs.branch }}"
-          echo "Tag: ${{ steps.latest_version.outputs.latest_tag }}"
-          echo "Sha: ${{ steps.vars.outputs.sha_short }}"
 
       - name: Criando Imagem do Docker
-        run: docker build . --file Dockerfile --tag ghcr.io/guilhermestella/action-test:${GITHUB_SHA::8}
+        run: docker build . --file Dockerfile --tag ghcr.io/${github.repository}:${steps.latest_version.outputs.latest_tag}
 
-      # Push Image to Registry
       - name: Push the tagged Docker image
-        run: docker push ghcr.io/guilhermestella/action-test:${GITHUB_SHA::8}
+        run: docker push ghcr.io/${github.repository}:${steps.latest_version.outputs.latest_tag}
