@@ -24,10 +24,17 @@ jobs:
           echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
           
+      - name: Get Latest Release
+        id: latest_version
+        uses: abatilo/release-info-action@v1.3.0
+        with:
+          owner: guilhermestella
+          repo: action-test
+          
       - name: Imprimindo variáveis
         run: |
           echo "Branch: ${{ steps.vars.outputs.branch }}"
-          echo "Tag: ${{ steps.vars.outputs.tag }}"
+          echo "Tag: ${{ steps.latest_version.outputs.latest_tag }}"
           echo "Sha: ${{ steps.vars.outputs.sha_short }}"
 
       - name: Criando Imagem do Docker
